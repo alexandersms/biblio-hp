@@ -1,4 +1,7 @@
 <template>
+  <!-- 
+    Composant permettant d'afficher la liste des livres 
+  -->
   <div class="container">
     <div class="row">
       <Book v-for="book in books" :key="book.isbn" :book="book" />
@@ -16,16 +19,21 @@ export default {
   },
 
   computed: {
+    /*
+     * Récuperation des données de l'état books
+     * via le store
+     */
     books() {
       return this.$store.state.books;
     }
   },
 
   mounted() {
-    console.log("Mounted");
+    /*
+     * Chargement des livres disponible dans l'api via
+     * le store grâce à l'action getBooks
+     */
     this.$store.dispatch("getBooks");
   }
 };
 </script>
-
-<style scoped></style>
