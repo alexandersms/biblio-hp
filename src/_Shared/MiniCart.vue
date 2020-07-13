@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import { mapState, mapGetters } from "vuex";
+import { mapState, mapGetters, mapActions } from "vuex";
 
 export default {
   /*
@@ -37,16 +37,13 @@ export default {
     ...mapState(["cart"]),
     ...mapGetters(["cartTotalPrice"])
   },
-  /**
-   * Supprimer un  livre du panier
-   */
+
   methods: {
-    removeBookFromCart(book) {
-      this.$store.dispatch("removeBookFromCart", book);
-    },
-    clearCartItems() {
-      this.$store.dispatch("clearCartItems");
-    }
+    /**
+     * Supprimer un  livre du panier
+     * Vider le pan
+     */
+    ...mapActions(["removeBookFromCart", "clearCartItems"])
   }
 };
 </script>
