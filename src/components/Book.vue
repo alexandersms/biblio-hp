@@ -11,9 +11,9 @@
           <div class="price text-success">
             <h5 class="mt-4">{{ book.price }} &euro;</h5>
           </div>
-          <a href="#" class="btn btn-danger mt-3"
-            ><i class="fas fa-shopping-cart"></i> Ajouter au panier</a
-          >
+          <button class="btn btn-danger mt-3" @click="addToCart()">
+            <i class="fas fa-shopping-cart"></i> Ajouter au panier
+          </button>
         </div>
       </div>
     </div>
@@ -23,8 +23,15 @@
 <script>
 export default {
   name: "Book",
-  props: ["book"]
+  props: ["book"],
+
+  methods: {
+    addToCart() {
+      this.$store.dispatch("addBookToCart", {
+        book: this.book,
+        quantity: 1
+      });
+    }
+  }
 };
 </script>
-
-<style scoped></style>

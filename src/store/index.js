@@ -8,7 +8,8 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     books: [],
-    errormessage: ""
+    errormessage: "",
+    cart: []
   },
   mutations: {
     API_FAILURE(state, error) {
@@ -20,6 +21,21 @@ export default new Vuex.Store({
     },
     SET_BOOKS(state, data) {
       state.books = data.data;
+    },
+    ADD_TO_CART(state, { book, quantity }) {
+      let bookInCart = state.cart.find(item => {
+        return item.book.isbn === book.isbn;
+      });
+
+      if (bookInCart) {
+        bookInCart.quantity += quantity;
+        return;
+      }
+
+      state.cart.push({
+        book,
+        quantity
+      });
     }
   },
   actions: {
@@ -31,7 +47,23 @@ export default new Vuex.Store({
           this.state.errormessage = "";
         })
         .catch(error => commit("API_FAILURE", error));
+    },
+    addBookToCart({ commit }, { book, quantity }) {
+      commit("ADD_TO_CART", { book, quantity });
     }
   },
-  modules: {}
+  getters: {
+    books: state => state.books,
+    erromessage: state => state.errormessage,
+    cartItemCount: state => state.cart.length,
+    cartTotalPrice: state => {
+      let total = 0;
+
+      state.cart.forEach(item => {
+        total += item.book.price * item.quantity;
+      });
+
+      return total;
+    }
+  }
 });

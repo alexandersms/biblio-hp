@@ -10,6 +10,7 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from "vuex";
 import Book from "@/components/Book.vue";
 export default {
   name: "Books",
@@ -23,9 +24,7 @@ export default {
      * Récuperation des données de l'état books
      * via le store
      */
-    books() {
-      return this.$store.state.books;
-    }
+    ...mapGetters(["books"])
   },
 
   mounted() {
@@ -33,7 +32,10 @@ export default {
      * Chargement des livres disponible dans l'api via
      * le store grâce à l'action getBooks
      */
-    this.$store.dispatch("getBooks");
+    this.getBooks();
+  },
+  methods: {
+    ...mapActions(["getBooks"])
   }
 };
 </script>
