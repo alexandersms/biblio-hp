@@ -5,11 +5,13 @@ const booksUrl = "http://henri-potier.xebia.fr/books";
 
 Vue.use(Vuex);
 
+let cart = window.localStorage.getItem("cart");
+
 export default new Vuex.Store({
   state: {
     books: [],
     errormessage: "",
-    cart: []
+    cart: cart ? JSON.parse(cart) : []
   },
   mutations: {
     API_FAILURE(state, error) {
@@ -36,6 +38,10 @@ export default new Vuex.Store({
         book,
         quantity
       });
+      this.commit("SAVE_DATA");
+    },
+    SAVE_DATA(state) {
+      window.localStorage.setItem("cart", JSON.stringify(state.cart));
     }
   },
   actions: {
