@@ -42,6 +42,16 @@ export default new Vuex.Store({
     },
     SAVE_DATA(state) {
       window.localStorage.setItem("cart", JSON.stringify(state.cart));
+    },
+    REMOVE_BOOK_FROM_CART(state, book) {
+      state.cart = state.cart.filter(item => {
+        return item.book.isbn !== book.isbn;
+      });
+      this.commit("SAVE_DATA");
+    },
+    CLEAR_CART_ITEMS(state) {
+      state.cart = [];
+      this.commit("SAVE_DATA");
     }
   },
   actions: {
@@ -56,6 +66,12 @@ export default new Vuex.Store({
     },
     addBookToCart({ commit }, { book, quantity }) {
       commit("ADD_TO_CART", { book, quantity });
+    },
+    removeBookFromCart({ commit }, book) {
+      commit("REMOVE_BOOK_FROM_CART", book);
+    },
+    clearCartItems({ commit }) {
+      commit("CLEAR_CART_ITEMS");
     }
   },
   getters: {

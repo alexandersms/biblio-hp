@@ -8,14 +8,19 @@
           {{ item.quantity }} x {{ item.book.price * item.quantity }} &euro;
         </div>
         <div>
-          <a href="" class="badge badge-danger">supprimer</a>
+          <a
+            href=""
+            class="badge badge-danger"
+            @click.prevent="removeBookFromCart(item.book)"
+            >supprimer</a
+          >
         </div>
       </div>
       <hr />
     </div>
     <div class="d-flex justify-content-between">
       <span>Total: {{ cartTotalPrice }} &euro;</span>
-      <a href="">Vider le panier</a>
+      <a href="" @click.prevent="clearCartItems()">Vider le panier</a>
     </div>
   </div>
 </template>
@@ -31,6 +36,17 @@ export default {
   computed: {
     ...mapState(["cart"]),
     ...mapGetters(["cartTotalPrice"])
+  },
+  /**
+   * Supprimer un  livre du panier
+   */
+  methods: {
+    removeBookFromCart(book) {
+      this.$store.dispatch("removeBookFromCart", book);
+    },
+    clearCartItems() {
+      this.$store.dispatch("clearCartItems");
+    }
   }
 };
 </script>
