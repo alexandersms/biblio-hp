@@ -21,6 +21,9 @@
     <div class="d-flex justify-content-between">
       <span>Total: {{ cartTotalPrice }} &euro;</span>
       <a href="" @click.prevent="clearCartItems()">Vider le panier</a>
+      <a href="">
+        <router-link to="/cart">Voir le panier</router-link>
+      </a>
     </div>
   </div>
 </template>

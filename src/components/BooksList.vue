@@ -4,19 +4,19 @@
   -->
   <div class="container">
     <div class="row">
-      <Book v-for="book in books" :key="book.isbn" :book="book" />
+      <BookCard v-for="book in books" :key="book.isbn" :book="book" />
     </div>
   </div>
 </template>
 
 <script>
 import { mapGetters, mapActions } from "vuex";
-import Book from "@/components/Book.vue";
+import BookCard from "@/components/BookCard.vue";
 export default {
-  name: "Books",
+  name: "BooksList",
 
   components: {
-    Book
+    BookCard
   },
 
   computed: {
