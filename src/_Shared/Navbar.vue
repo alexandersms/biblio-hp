@@ -1,6 +1,6 @@
 <template>
   <div class="mb-3">
-    <nav class="navbar navbar-expand navbar-dark bg-success">
+    <nav class="navbar navbar-expand navbar-dark bg-primary">
       <div class="container">
         <div class="nav navbar-nav" id="nav">
           <router-link to="/" class="nav-item nav-link">Home</router-link>

@@ -1,7 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import axios from "axios";
-const booksUrl = "http://henri-potier.xebia.fr/books";
+import Books from "../api/Books";
 
 Vue.use(Vuex);
 
@@ -39,6 +38,7 @@ export default new Vuex.Store({
         quantity
       });
       this.commit("SAVE_DATA");
+      console.log(state.cart.quantity);
     },
     SAVE_DATA(state) {
       window.localStorage.setItem("cart", JSON.stringify(state.cart));
@@ -56,8 +56,7 @@ export default new Vuex.Store({
   },
   actions: {
     getBooks({ commit }) {
-      axios
-        .get(`${booksUrl}`)
+      Books.all()
         .then(data => {
           commit("SET_BOOKS", data);
           this.state.errormessage = "";
