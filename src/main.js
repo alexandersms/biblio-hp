@@ -4,7 +4,7 @@ import router from "./router";
 import store from "./store";
 
 // import bootswatch
-import 'bootswatch/dist/cyborg/bootstrap.min.css';
+import "bootswatch/dist/cyborg/bootstrap.min.css";
 
 Vue.config.productionTip = false;
 
