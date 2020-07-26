@@ -6,7 +6,7 @@
     <div class="card">
       <img class="card-img" :src="book.cover" />
       <div class="card-body">
-        <h4 class="card-title h2">{{ book.title }}</h4>
+        <h4 class="card-title">{{ book.title }}</h4>
         <div class="buy d-flex justify-content-between align-items-center">
           <div class="price text-success">
             <h5 class="mt-4">{{ book.price }} &euro;</h5>
